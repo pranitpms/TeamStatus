@@ -1,0 +1,30 @@
+﻿
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Select Date <small>to view the status</small> </h5>
+                </div>
+
+                <div class="ibox-content">
+
+                    <!--<ui-select ng-model="sample.selected" search-enabled="true">
+
+                        <ui-select-match placeholder="Pick one...">{{$select.selected.description}}</ui-select-match>
+                        <ui-select-choices repeat="item in sample.items | filter: $select.search track by item.code">
+                            <span ng-bind-html="item.description | highlight: $select.search"></span>
+                        </ui-select-choices>
+                    </ui-select>
+
+
+                   
+                    {{sample.selected}}-->
+                    {{sample.items|json}}
+                    <ui-dropdown config="sample.items" model="sample.value" on-select="sample.onSelect(model)"></ui-dropdown>
+                    {{sample.value}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

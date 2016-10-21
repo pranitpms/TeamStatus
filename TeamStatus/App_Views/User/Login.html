@@ -1,0 +1,26 @@
+﻿<div>
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div>
+            <div>
+                <h1 class="logo-name">TS</h1>
+            </div>
+            <h3>Welcome to Team Status</h3>
+            <p>Login in</p>
+
+            <form class="m-t" role="form" name="SignUp" novalidate>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="UserNameTextBox" placeholder="UserName" ng-model="login.UserName" />
+                </div>
+                <div class="form-group" ng-show="login.isPassVisible">
+                    <input type="password" class="form-control" id="passwordTextBox" placeholder="Password" ng-model="login.Password" />
+                </div>
+                <div class="form-group">
+                    <button type="reset" class="btn btn-default block full-width m-b" ng-click="login.Cancel()">Cancel</button>
+                    <button type="button" class="btn btn-primary block full-width m-b" ng-click="login.SignIn()">LogIn</button>
+                    <button type="button" class="btn btn-link" ng-click="login.ShowPassword()" ng-show="login.isPassVisible">Guest Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

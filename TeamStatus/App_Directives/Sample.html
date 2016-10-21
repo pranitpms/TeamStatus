@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="uiModule">
+<head>
+    <title>Sample Inputs</title>
+    <link href="../Content/bootstrap.css" rel="stylesheet" />o
+    <script src="../Scripts/jquery-ui-1.8.24.js"></script>
+    <script src="../Scripts/angular.js"></script>
+
+    <script src="my-textInput/my-text-input.js"></script>
+    <script>
+        (function () {
+            angular.module('uiModule', ['my-element', 'ui-element'])
+                .controller('TestController', function () {
+                    var test = this;
+
+                    test.config = {
+                        FieldLength: 50,
+                        Label: 'TextBox',
+                        Name: 'Test TextBox',
+                        Required: true
+                    }
+
+                    test.config1 = {
+                        required: true,
+                        minDate: new Date(2015, 1, 1),
+                        maxDate: new Date(2022, 1, 1)
+                    }
+
+                });
+        })();
+    </script>
+
+
+</head>
+<body>
+    <div class="container-fluid" ng-controller="TestController as test">
+        <div class="row">
+            <div>
+                <my-text-input name="test.config.Name" config="test.config" ng-required="test.config.Required"></my-text-input>
+            </div>
+        </div>
+        <div class="row">
+            <div >
+                <ui-datepicker config="test.config1"> </ui-datepicker>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

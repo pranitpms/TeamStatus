@@ -1,0 +1,84 @@
+﻿
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Users Details</h5>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <th>
+                                <div class="btn-toolbar">
+                                    <i class="btn btn-default fa fa-plus-square" ng-click="user.toggleAddMode()"></i>
+                                </div>
+                            </th>
+                            <th ng-repeat="column in user.config.columns" ng-show="column.isVisible" style="width: 20%;">
+                                {{ column.lable }}
+                            </th>
+                            <th style="width: 15%;">
+
+                            </th>
+                        </tr>
+                        <tr ng-show="user.addMode">
+                            <td></td>
+                            <td ng-repeat="column in user.config.columns" ng-show="column.isVisible">
+                                <div class="input-group">
+                                    <div ng-if="!column.isDropdown">
+                                        <input ng-model="user.object[column.name]" type="{{column.type}}" model-change-blur class="form-control" />
+                                    </div>
+                                </div>
+                                <div ng-if="column.isDropdown">
+                                    <ui-dropdown config="user.roles" model="user.object[column.name]" on-select="user.SetFieldValue(model, user.object, column.name)"></ui-dropdown>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="btn-toolbar">
+                                    <div class="btn-group">
+                                        <i class="btn btn-default fa fa-floppy-o" ng-click="user.addObject();user.toggleAddMode()"></i>
+                                        <i class="btn btn-default fa fa-trash" ng-click="user.toggleAddMode()"></i>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="data in user.Resources">
+                            <td style="width: 1%;">
+                                {{ $index+1 }}
+                            </td>
+                            <td ng-repeat="column in user.config.columns" ng-show="column.isVisible" ng-switch on="data.editMode">
+                                <div ng-switch-default>
+                                    <span>{{ data[column.name]}}</span>
+                                </div>
+                                <div ng-switch-when="true">
+                                    <div class="input-group">
+                                        <div ng-if="!column.isDropdown">
+                                            <input ng-model="data[column.name]" type="{{column.type}}" model-change-blur class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div ng-if="column.isDropdown">
+                                        <ui-dropdown config="user.roles" model="data[column.name]" on-select="user.SetFieldValue(model, user.object, column.name)"></ui-dropdown>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="btn-toolbar" ng-switch on="data.editMode">
+                                    <div class="btn-group" ng-switch-default>
+                                        <i class="btn btn-default fa fa-pencil" ng-click="user.toggleEditMode(data)"></i>
+                                        <i class="btn btn-default fa fa-trash" ng-click="user.deleteObject(data)"></i>
+                                    </div>
+                                    <div class="btn-group" ng-switch-when="true">
+                                        <i class="btn btn-default fa fa-floppy-o" ng-click="user.updateObject(data);user.toggleEditMode(data);"></i>
+                                        <i class="btn btn-default fa fa-times" ng-click="user.toggleEditMode(data)"></i>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

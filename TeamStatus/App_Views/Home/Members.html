@@ -1,0 +1,95 @@
+﻿<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Select Team : </h5>
+                </div>
+                <div class="ibox-content">
+                        <ui-dropdown config="member.TeamList" model="member.TeamName" on-select="member.onSelect(model)"></ui-dropdown>
+                </div>
+            </div>
+        
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Memeber Details</h5>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <th>
+                                <div class="btn-toolbar">
+                                    <i class="btn btn-default fa fa-plus-square" ng-click="member.toggleAddMode()" ng-disabled="member.isDisableAdd"></i>
+                                </div>
+                            </th>
+                            <th ng-repeat="column in member.config.columns" ng-show="column.isVisible" style="width: 40%">
+                                {{ column.lable }}
+                            </th>
+                            <th style="width: 15%">
+
+                            </th>
+                        </tr>
+                        <tr ng-show="member.addMode">
+                            <td></td>
+                            <td ng-repeat="column in member.config.columns" ng-show="column.isVisible">
+                                <div class="input-group">
+                                    <div ng-if="!column.isDropdown">
+                                        <input ng-model="member.object[column.name]" type="{{column.type}}" model-change-blur class="form-control" />
+                                    </div>
+                                </div>
+                                <div ng-if="column.isDropdown">
+                                    <ui-dropdown config="member.ListView(column.name)" model="member.object[column.name]" on-select="member.SetFieldValue(model, member.object, column.name)"></ui-dropdown>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="btn-toolbar">
+                                    <div class="btn-group">
+                                        <i class="btn btn-default fa fa-floppy-o" ng-click="member.addObject();member.toggleAddMode()"></i>
+                                        <i class="btn btn-default fa fa-trash" ng-click="member.toggleAddMode()"></i>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="data in member.Resources | filter : member.filterById">
+                            <td style="width: 1%;">
+                                {{ $index+1 }}
+                            </td>
+                            <td ng-repeat="column in member.config.columns" ng-show="column.isVisible" ng-switch on="data.editMode">
+                                <div ng-switch-default>
+                                    <span>{{ data[column.name]}}</span>
+                                </div>
+
+                                <div ng-switch-when="true">
+                                    <div class="input-group">
+                                        <div ng-if="!column.isDropdown">
+                                            <input ng-model="data[column.name]" type="{{column.type}}" model-change-blur class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div ng-if="column.isDropdown">
+                                        <ui-dropdown config="member.ListView(column.name)" model="member.object[column.name]" on-select="member.SetFieldValue(model, member.object, column.name)"></ui-dropdown>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="btn-toolbar" ng-switch on="data.editMode">
+                                    <div class="btn-group" ng-switch-default>
+                                        <i class="btn btn-default fa fa-pencil" ng-click="member.toggleEditMode(data)"></i>
+                                        <i class="btn btn-default fa fa-trash" ng-click="member.deleteObject(data)"></i>
+                                    </div>
+                                    <div class="btn-group" ng-switch-when="true">
+                                        <i class="btn btn-default fa fa-floppy-o" ng-click="member.updateObject(data);member.toggleEditMode(data);"></i>
+                                        <i class="btn btn-default fa fa-times" ng-click="member.toggleEditMode(data)"></i>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

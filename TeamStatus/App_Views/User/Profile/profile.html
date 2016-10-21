@@ -1,0 +1,121 @@
+﻿<div class="wrapper wrapper-content">
+    <div class="row animated fadeInRight">
+        <div class="col-md-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Profile Detail</h5>
+                    <div class="ibox-tools">
+                        <div ng-switch on="profile.AddMode">
+                            <div ng-switch-default>
+                                <i class="btn btn-primary fa fa-wrench" ng-click="profile.editProfile()"></i>
+                            </div>
+                            <div ng-switch-when="true">
+                                <i class="btn btn-primary fa fa-floppy-o" ng-click="profile.updateInfo();profile.editProfile();"></i>
+                                <i class="btn btn-primary fa fa-times" ng-click="profile.editProfile()"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>                    
+                    <div class="ibox-content no-padding border-left-right">
+                        <div flow-init="{singleFile:true}"
+                             flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+                             flow-name="profile.obj.flow"
+                             flow-complete="profile.onUploadCompleted"
+                             flow-error="profile.onFlowError( $file, $message, $flow )">
+                            <div class="thumbnail" ng-show="!profile.obj.flow.files.length">
+                                <img alt="image" class="img-responsive" ng-src="{{profile.image}}" style="width: 100%">
+                            </div>
+                            <div class="thumbnail" ng-show="profile.obj.flow.files.length">
+                                <img flow-img="profile.obj.flow.files[0]" />
+                            </div>
+                            <div>
+                                <i class="btn btn-primary fa fa-pencil" flow-btn></i>
+                                <i class="btn btn-danger fa fa-times" ng-show="profile.obj.flow.files.length" ng-click="profile.obj.flow.cancel()"></i>
+                                <i class="btn btn-primary fa fa-floppy-o" ng-show="profile.obj.flow.files.length" ng-click="profile.saveImage(profile.obj.flow.files[0])"></i>
+                            </div>
+                        </div>
+                     </div>
+                        <!--<div class="ibox-content no-padding border-left-right">
+            <div class="ImageHover" style="position: relative">
+                <img alt="image" class="img-responsive" ng-src="{{profile.image}}" style="width: 100%">
+                <div flow-init="{singleFile:true, target: 'http://localhost:63214/App_Views/User/Profile/DP', testChunks:false }" flow-name="profileobj.flow">
+                    <div class="editImage" style="background-color: transparent; display: none; position: relative;">
+                        <div class="ibox-tools">
+                            <input type="file" flow-btn />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>-->
+
+                    </div>
+                    <div class="ibox-content profile-content">
+                        <h4><strong>{{profile.name}}</strong></h4>
+                        <p>
+                            <div ng-switch on="profile.AddMode">
+                                <div ng-switch-default>
+                                    <i class="fa fa-map-marker"></i> {{profile.address}}
+                                </div>
+                                <div ng-switch-when="true">
+                                    <input type="text" ng-model="profile.address" style="width: 100%"/>
+                                </div>
+                            </div>
+                        </p>
+                        <h5>
+                            About me
+                        </h5>
+                        <p>
+
+                            <div ng-switch on="profile.AddMode">
+                                <div ng-switch-default>
+                                    {{profile.about}}
+                                </div>
+                                <div ng-switch-when="true">
+                                    <textarea ng-model="profile.about" style="width: 100%"></textarea>
+                                </div>
+                            </div>
+                        </p>
+                        <!--<div class="row m-t-lg">
+                            <div class="col-md-4">
+                                <span class="bar">5,3,9,6,5,9,7,3,5,2</span>
+                                <h5><strong>169</strong> Posts</h5>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="line">5,3,9,6,5,9,7,3,5,2</span>
+                                <h5><strong>28</strong> Following</h5>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="bar">5,3,2,-1,-3,-2,2,3,5,2</span>
+                                <h5><strong>240</strong> Followers</h5>
+                            </div>
+                        </div>-->
+                        <!--<div class="user-button">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i> Send Message</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-default btn-sm btn-block"><i class="fa fa-coffee"></i> Buy a coffee</button>
+                                </div>
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("div.ImageHover").hover(
+            function () {
+                $("div.editImage").fadeIn('slow');
+            },
+            function () {
+                $("div.editImage").fadeOut('slow');
+            }
+        );
+    });
+</script>

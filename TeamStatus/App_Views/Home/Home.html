@@ -1,0 +1,103 @@
+﻿
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <span>
+                            <img alt="image" class="img-circle" src="" />
+                        </span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear">
+                                <span class="block m-t-xs">
+                                    <strong class="font-bold">David Williams</strong>
+                                </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a ui-sref="Home.Profile">Profile</a></li>
+                            <li><a href="contacts.html">Contacts</a></li>
+                            <li><a href="mailbox.html">Mailbox</a></li>
+                            <li class="divider"></li>
+                            <li><a ui-sref="login">Logout</a></li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        IN+
+                    </div>
+                </li>
+                <li>
+                    <a ui-sref="Home"><i class="fa fa-tachometer"></i> <span class="nav-label">Dashboard</span></a>
+                </li>
+                <li>
+                    <a ui-sref="Home.UserStatus"><i class="fa fa-file-excel-o"></i> <span class="nav-label">Status</span></a>
+                </li>
+                <li ng-if="home.isSuperAdmin">
+                    <a ui-sref="Home.Teams"><i class="fa fa-user-plus"></i> <span class="nav-label">Teams</span></a>
+                </li>
+                <li ng-if="home.isSuperAdmin || home.isAdmin">
+                    <a ui-sref="Home.Members"><i class="fa fa-users"></i> <span class="nav-label">Team Members</span></a>
+                </li>
+                <li ng-if="home.isSuperAdmin">
+                    <a ui-sref="Home.User"><i class="fa fa-user"></i> <span class="nav-label">Users</span></a>
+                </li>
+                <li ng-if="home.isSuperAdmin">
+                    <a ui-sref="Home.View"><i class="fa fa-user"></i> <span class="nav-label">Sample</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary" id="toggleButton" href="#"><i class="fa fa-bars"></i> </a>
+                    <form role="search" class="navbar-form-custom" action="../../Views/Home/search_results.html">
+                        <div class="form-group">
+                            <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                        </div>
+                    </form>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <p class="navbar-text"><a ui-sref="Home" class="navbar-link">TeamStatus</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <p class="navbar-text navbar-right"><a ui-sref="login" class="navbar-link" ng-show="home.isActive">LogOut</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="wrapper wrapper-content">
+                    <ui-breadcrumbs displayname-property="data.displayName" template-url="../App_Views/Template/BreadCrumsTplt.html"></ui-breadcrumbs>
+
+                    <div ui-view></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="footer fixed">
+                    <div class="pull-right">
+                        <strong>Copyright</strong>Pranit Bardapurkar &copy; 2015-2016
+                    </div>
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+

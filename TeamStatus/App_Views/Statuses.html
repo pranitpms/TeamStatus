@@ -1,0 +1,106 @@
+﻿<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Select Date <small>to view the status</small> </h5>
+                </div>
+
+                <div class="ibox-content">
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{status.format}}" ng-model="status.StatusDate" is-open="status.opened" min-date="status.minDate" max-date="status.maxDate" datepicker-options="status.dateOptions" date-disabled="status.disabled(date, mode)" ng-required="true" close-text="Close" ng-change="status.onDateSelected()" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="status.open($event)"><i class="fa fa-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Status Details</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div ng-show="status.addMode">
+                            <form>
+                                <div ng-repeat="column in status.config.columns" ng-show="column.isVisible" class="form-group col-md-6 input-group">
+                                    <label class="sr-only" for="{{'Input' + column.name}}">{{column.lable}}</label>
+                                    <input ng-model="status.object[column.name]" type="{{column.type}}" class="form-control" id="{{'Input' + column.name}}" placeholder="{{column.lable}}" ng-if="column.type != 'textarea' && !column.isDropdown">
+                                    <textarea ng-model="status.object[column.name]" class="form-control" ng-if="column.type == 'textarea'" placeholder="{{column.lable}}"></textarea>
+                                    <div ng-if="column.isDropdown">
+                                        <ui-dropdown config="status.ResourceLookup" model="status.object[column.name]" on-select="status.SetFieldValue(model, status.object, column.name)"></ui-dropdown>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="form-group">
+                                <div class="btn-group">
+                                    <i class="btn btn-default fa fa-floppy-o" ng-click="status.addObject();status.toggleAddMode()"></i>
+                                    <i class="btn btn-default fa fa-trash" ng-click="status.toggleAddMode()"></i>
+                                </div>
+                            </div>
+
+                            <hr />
+                        </div>
+
+
+                        <div style="overflow-y: auto;">
+                            <table class="table table-bordered table-hover">
+                                <tr>
+                                    <th>
+                                        <div class="btn-toolbar">
+                                            <i class="btn btn-default fa fa-plus-square" ng-click="status.toggleAddMode()" ng-disabled="status.isDisableAdd"></i>
+                                        </div>
+                                    </th>
+                                    <th ng-repeat="column in status.config.columns" ng-show="column.isVisible" ng-style="column.style">
+                                        {{ column.lable }}
+                                    </th>
+                                    <th style="width: 15%;">
+
+                                    </th>
+                                </tr>
+
+                                <tr ng-repeat="data in status.statusList ">
+                                    <td style="width: 1%;">
+                                        {{ $index+1 }}
+                                    </td>
+                                    <td ng-repeat="column in status.config.columns" ng-show="column.isVisible" ng-switch on="data.editMode">
+                                        <div ng-switch-default>
+                                            <span>{{ data[column.name]}}</span>
+                                        </div>
+
+                                        <div ng-switch-when="true">
+                                            <div class="input-group">
+                                                <input ng-model="data[column.name]" type="{{column.type}}" model-change-blur class="form-control" ng-if="column.type != 'textarea'" />
+                                                <textarea ng-model="data[column.name]" class="form-control" ng-if="column.type == 'textarea'"></textarea>
+                                            </div>
+                                            <div ng-if="column.isDropdown">
+                                                <ui-dropdown config="status.ResourceLookup" model="data[column.name]" on-select="status.SetFieldValue(model, status.object, column.name)"></ui-dropdown>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="btn-toolbar" ng-switch on="data.editMode">
+                                            <div class="btn-group" ng-switch-default>
+                                                <i class="btn btn-default fa fa-pencil" ng-click="status.toggleEditMode(data)"></i>
+                                                <i class="btn btn-default fa fa-trash" ng-click="status.deleteObject(data)"></i>
+                                            </div>
+                                            <div class="btn-group" ng-switch-when="true">
+                                                <i class="btn btn-default fa fa-floppy-o" ng-click="status.updateObject(data);status.toggleEditMode(data);"></i>
+                                                <i class="btn btn-default fa fa-times" ng-click="status.toggleEditMode(data)"></i>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

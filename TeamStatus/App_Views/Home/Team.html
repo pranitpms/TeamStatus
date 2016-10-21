@@ -1,0 +1,70 @@
+﻿<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Teams Details</h5>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <th>
+                                <div class="btn-toolbar">
+                                    <i class="btn btn-default fa fa-plus-square" ng-click="team.toggleAddMode()"></i>
+                                </div>
+                            </th>
+                            <th ng-repeat="column in team.config.columns" ng-show="column.isVisible">
+                                {{ column.lable }}
+                            </th>
+                            <th>
+
+                            </th>
+                        </tr>
+                        <tr ng-show="team.addMode">
+                            <td></td>
+                            <td ng-repeat="column in team.config.columns" ng-show="column.isVisible">
+                                <input ng-model="team.object[column.name]" type="{{column.type}}" class="form-control" ng-show="!column.isPrimary"/>
+                            </td>
+                            <td>
+                                <div class="btn-toolbar">
+                                    <div class="btn-group">
+                                        <i class="btn btn-default fa fa-floppy-o" ng-click="team.addObject();team.toggleAddMode()"></i>
+                                        <i class="btn btn-default fa fa-trash" ng-click="team.toggleAddMode()"></i>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="data in team.data">
+                            <td style="width: 1%;">
+                                {{ $index+1 }}
+                            </td>
+                            <td ng-repeat="column in team.config.columns" ng-show="column.isVisible" ng-switch on="data.editMode">
+                                <div ng-switch-default>
+                                    <span>{{ data[column.name]}}</span>
+                                </div>
+                                <div ng-switch-when="true">
+                                    <input ng-model="data[column.name]" type="{{column.type}}" model-change-blur class="form-control"/>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="btn-toolbar" ng-switch on="data.editMode">
+                                    <div class="btn-group" ng-switch-default>
+                                        <i class="btn btn-default fa fa-pencil" ng-click="team.toggleEditMode(data)"></i>
+                                        <i class="btn btn-default fa fa-trash" ng-click="team.deleteObject(data)"></i>
+                                    </div>
+                                    <div class="btn-group" ng-switch-when="true">
+                                        <i class="btn btn-default fa fa-floppy-o" ng-click="team.updateObject(data);team.toggleEditMode(data);"></i>
+                                        <i class="btn btn-default fa fa-times" ng-click="team.toggleEditMode(data)"></i>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

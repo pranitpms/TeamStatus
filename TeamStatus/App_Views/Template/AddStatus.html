@@ -1,0 +1,69 @@
+﻿
+    <div class="modal-header">
+        <h3 class="modal-title">Add Status</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="Status">
+            <div class="form-group">
+                <label class="col-lg-2 control-label" for="devName"> Developer </label>
+                <div class="col-lg-10">
+                    <select class="form-control" id="devName" ng-model="Developer" ng-options="resource as resource.resourceName for resource in ResourceInfo"></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="jiraTextBox" class="col-lg-2 control-label"> JiraId </label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="jiraTextBox" ng-model="JiraId" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="descriptionTextBox" class="col-lg-2 control-label"> Description </label>
+                <div class="col-lg-10">
+                    <textarea class="form-control" rows="3" id="descriptionTextBox" ng-model="Description"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="descriptionRemark" class="col-lg-2 control-label"> Remark </label>
+                <div class="col-lg-10">
+                    <textarea class="form-control" rows="3" id="descriptionRemark" ng-model="Remark"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label" for="Status"> Status </label>
+                <div class="col-lg-10">
+                    <select class="form-control" id="Status" ng-model="Status" ng-options="flow.name as flow.name for flow in workStatus"></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label" for="StartDateTextBox"> StartDate </label>
+                <div class="col-md-8">
+                    <p class="input-group">
+                        <input type="text" id="StartDateTextBox" class="form-control" datepicker-popup="{{format}}" ng-model="StartDate" is-open="opened" datepicker-options="dateOptions" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openCalender($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label" for="Category"> Category </label>
+                <div class="col-lg-10">
+                    <select class="form-control" id="Category" ng-model="Category" ng-options="task.type as task.type for task in taskType"></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="submit" class="btn btn-default" ng-click="AddResource()">Add</button>
+                    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+

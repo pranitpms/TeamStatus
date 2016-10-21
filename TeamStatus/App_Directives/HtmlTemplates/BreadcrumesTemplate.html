@@ -1,0 +1,13 @@
+﻿<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>{{ crumb.displayName }}</h2>
+        <ol class="breadcrumb">
+            <li ng-repeat="crumb in breadcrumbs" ng-class="{ active: $last }">
+                <a ui-sref="{{ crumb.route }}" ng-if="!$last">{{ crumb.displayName }}&nbsp;</a><span ng-show="$last">{{ crumb.displayName }}</span>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
